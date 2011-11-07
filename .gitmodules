@@ -79,3 +79,6 @@
 [submodule "bundle/molokai"]
 	path = bundle/molokai
 	url = git://github.com/tomasr/molokai.git
+[submodule "bundle/fu"]
+	path = bundle/fu
+	url = git://github.com/vim-scripts/fu.git
