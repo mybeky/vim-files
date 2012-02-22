@@ -9,7 +9,7 @@
 	url = git://github.com/tpope/vim-repeat.git
 [submodule "bundle/matchit"]
 	path = bundle/matchit
-	url = git://github.com/mhz/vim-matchit.git
+	url = git://github.com/tsaleh/vim-matchit.git
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
