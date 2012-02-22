@@ -64,12 +64,6 @@
 [submodule "bundle/simple-javascript-indenter"]
 	path = bundle/simple-javascript-indenter
 	url = git://github.com/jiangmiao/simple-javascript-indenter.git
-[submodule "bundle/lusty"]
-	path = bundle/lusty
-	url = git://github.com/sjbach/lusty.git
-[submodule "bundle/command-t"]
-	path = bundle/command-t
-	url = git://git.wincent.com/command-t.git
 [submodule "bundle/vim-quotes"]
 	path = bundle/vim-quotes
 	url = git://github.com/kurkale6ka/vim-quotes.git
