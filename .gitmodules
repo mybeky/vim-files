@@ -82,3 +82,6 @@
 [submodule "bundle/tomorrow-theme"]
 	path = bundle/tomorrow-theme
 	url = git://github.com/chriskempson/Vim-Tomorrow-Theme.git
+[submodule "bundle/vim-eddie"]
+	path = bundle/vim-eddie
+	url = git://github.com/mattsa/vim-eddie.git
