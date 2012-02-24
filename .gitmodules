@@ -91,3 +91,6 @@
 [submodule "bundle/Hemisu"]
 	path = bundle/Hemisu
 	url = git://github.com/noahfrederick/Hemisu.git
+[submodule "bundle/vim-mac-classic-theme"]
+	path = bundle/vim-mac-classic-theme
+	url = git://github.com/nelstrom/vim-mac-classic-theme.git
