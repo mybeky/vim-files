@@ -85,3 +85,9 @@
 [submodule "bundle/vim-eddie"]
 	path = bundle/vim-eddie
 	url = git://github.com/mattsa/vim-eddie.git
+[submodule "bundle/badwolf"]
+	path = bundle/badwolf
+	url = git://github.com/sjl/badwolf.git
+[submodule "bundle/Hemisu"]
+	path = bundle/Hemisu
+	url = git://github.com/noahfrederick/Hemisu.git
