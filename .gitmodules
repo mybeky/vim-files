@@ -10,9 +10,6 @@
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = git://github.com/tsaleh/vim-matchit.git
-[submodule "bundle/nerdcommenter"]
-	path = bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
 [submodule "bundle/neocomplcache"]
 	path = bundle/neocomplcache
 	url = git://github.com/Shougo/neocomplcache.git
@@ -103,3 +100,6 @@
 [submodule "bundle/neocomplcache-snippets-complete"]
 	path = bundle/neocomplcache-snippets-complete
 	url = git://github.com/Shougo/neocomplcache-snippets-complete.git
+[submodule "bundle/tcomment"]
+	path = bundle/tcomment
+	url = git://github.com/tomtom/tcomment_vim.git
