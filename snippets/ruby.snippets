@@ -12,6 +12,18 @@ snippet y
 snippet rb
 	#!/usr/bin/env ruby -wKU
 
+snippet enc
+	#!/usr/bin/env ruby -wKU
+	# -*- coding: utf-8 -*-
+	${1}
+
+snippet rdb
+    require 'debugger'; debugger
+	${1}
+
+snippet :=
+	:${1:key} => ${2:"value"}${3}
+
 snippet req
 	require "${1}"${2}
 snippet #

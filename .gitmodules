@@ -19,18 +19,12 @@
 [submodule "bundle/replacewithregister"]
 	path = bundle/replacewithregister
 	url = git://github.com/vim-scripts/ReplaceWithRegister.git
-[submodule "bundle/yankring"]
-	path = bundle/yankring
-	url = git://github.com/chrismetcalf/vim-yankring.git
 [submodule "bundle/bufexplorer"]
 	path = bundle/bufexplorer
 	url = git://github.com/vim-scripts/bufexplorer.zip.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
-[submodule "bundle/pep8"]
-	path = bundle/pep8
-	url = git://github.com/nvie/vim-pep8.git
 [submodule "bundle/mru"]
 	path = bundle/mru
 	url = git://github.com/vim-scripts/mru.vim.git
@@ -78,10 +72,7 @@
 	url = git://github.com/kana/vim-textobj-user.git
 [submodule "bundle/tomorrow-theme"]
 	path = bundle/tomorrow-theme
-	url = git://github.com/chriskempson/Vim-Tomorrow-Theme.git
-[submodule "bundle/vim-eddie"]
-	path = bundle/vim-eddie
-	url = git://github.com/mattsa/vim-eddie.git
+	url = git://github.com/chriskempson/vim-tomorrow-theme.git
 [submodule "bundle/badwolf"]
 	path = bundle/badwolf
 	url = git://github.com/sjl/badwolf.git
@@ -103,3 +94,45 @@
 [submodule "bundle/tcomment"]
 	path = bundle/tcomment
 	url = git://github.com/tomtom/tcomment_vim.git
+[submodule "bundle/skittles_berry"]
+	path = bundle/skittles_berry
+	url = git://github.com/shawncplus/skittles_berry.git
+[submodule "bundle/vitality"]
+	path = bundle/vitality
+	url = git://github.com/sjl/vitality.vim.git
+[submodule "bundle/vimux"]
+	path = bundle/vimux
+	url = git://github.com/benmills/vimux.git
+[submodule "bundle/sahara"]
+	path = bundle/sahara
+	url = git://github.com/tejr/sahara.git
+[submodule "bundle/harlequin"]
+	path = bundle/harlequin
+	url = git://github.com/nielsmadan/harlequin.git
+[submodule "bundle/elrodeo"]
+	path = bundle/elrodeo
+	url = git://github.com/chmllr/vim-colorscheme-elrodeo.git
+[submodule "bundle/vim-ruby"]
+	path = bundle/vim-ruby
+	url = https://github.com/vim-ruby/vim-ruby
+[submodule "bundle/vim-endwise"]
+	path = bundle/vim-endwise
+	url = git://github.com/tpope/vim-endwise.git
+[submodule "bundle/coffee-script"]
+	path = bundle/coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
+[submodule "bundle/unimpaired"]
+	path = bundle/unimpaired
+	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "bundle/yankring"]
+	path = bundle/yankring
+	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule "bundle/kolor"]
+	path = bundle/kolor
+	url = git://github.com/zeis/kolor.git
+[submodule "bundle/neosnippet"]
+	path = bundle/neosnippet
+	url = git://github.com/Shougo/neosnippet.git

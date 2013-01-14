@@ -1,9 +1,13 @@
+let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'vim-endwise')
+
 call pathogen#infect()
 
 fun! MySys()
   return "mac"
 endfun
 
+set shell=/bin/sh
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -22,6 +26,8 @@ set number
 set backspace=indent,eol,start
 "set autochdir
 
+set noshowcmd              " don't display incomplete commands
+set nolazyredraw           " turn off lazy redraw
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -40,6 +46,8 @@ map <F2> :nohl<cr>
 set pastetoggle=<F7>
 map <leader>x :%!xxd<cr>
 
+cmap w!! %!sudo tee > /dev/null %
+
 
 if has("win32")
     nmap <F6> :!start explorer /e,/select, %:p<CR>
@@ -57,7 +65,7 @@ endif
 nmap c=r $F=lc$<space>
 nmap c=l $F=hc^
 
-set matchpairs=(:),{:},[:],<:>
+"set matchpairs=':',":",(:),{:},[:]
 
 " 命令行bash快捷键
 "cnoremap <C-A> <Home>
@@ -136,11 +144,15 @@ nmap <leader>w :w!<cr>
 " Sessions
 "nmap <leader>so :OpenSession<cr>
 "nmap <leader>ss :SaveSession<cr>
-nmap <leader>so :SessionOpen<space>
-nmap <leader>ss :SessionSave<cr>
-nmap <leader>sl :SessionList<cr>
+nmap <leader>so :OpenSession<space>
+nmap <leader>sd :DeleteSession<space>
+nmap <leader>ss :SaveSession<space>
+nmap <leader>sv :ViewSession<cr>
+let g:session_autoload = 'no'
 "let g:session_autosave = 1
 "let g:session_autoload = 0
+
+let g:Powerline_symbols = 'fancy'
 
 " Fast editing of the .vimrc
 map <leader>e :e! ~/.vimrc<cr>
@@ -196,21 +208,28 @@ syntax enable "Enable syntax hl
 " Set font according to system
 
 set go=em
-set gfn=Panic\ Sans:h12
+" set gfn=Ubuntu\ Mono:h14
 "set guifont=Panic\ Sans:h12
-"set guifont=Inconsolata-dz:h12
-"set guifont=Monaco:h10
+set guifont=Meslo\ LG\ L\ DZ:h12
+"set guifont=Inconsolata:h16
+" set guifont=Meslo\ LG\ M\ DZ:h12
+"set guifont=Inconsolata\ xl:h16
+"set guifont=Inconsolata-dz:h14
+"set guifont=Inconsolata:h14
+"set guifont=Monaco:h12
 "set guifont=Panic\ Sans:h12
 "set gfw=STHeiTi:h10
 
 "colorscheme wombat256
-set background=dark
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-colorscheme solarized
-"colo molokai2
+"colorscheme Fluidvision
+"set background=dark
+"let g:solarized_termtrans=1
+"let g:solarized_termcolors=256
+"let g:solarized_contrast="normal"
+"let g:solarized_visibility="high"
+"colorscheme solarized
+"colo molokai
+colo harlequin
 "set cursorline
 "colorscheme pastie
 if has("gui_running")
@@ -220,6 +239,7 @@ if has("gui_running")
   "colorscheme solarized
   "so ~/.vim/autoload/togglebg.vim
   set invmacmeta
+  "set transparency=10
   set go-=T
   set t_Co=256
   "set background=dark
@@ -272,6 +292,16 @@ set tabstop=4
 set shiftround
 set softtabstop=4
 set smarttab
+
+" This is specific to rails apps, but I will not bind it to a particular
+" filetype
+function! TwoSpace()
+    setlocal tabstop=2
+    setlocal shiftwidth=2
+    setlocal softtabstop=2
+endfunction
+au FileType ruby call TwoSpace()
+au BufNewFile,BufRead *.erb call TwoSpace()
 
 set lbr
 set tw=500
@@ -414,11 +444,11 @@ map <a-7> 7gt
 map <a-8> 8gt
 map <a-9> :tablast<CR>
 
-map <c-t> :tabnew<CR>
+"map <c-t> :tabnew<CR>
 
 imap <a-]> <ESC>gt
 imap <a-[> <ESC>gT
-imap <c-t> <ESC>:tabnew<CR>
+"imap <c-t> <ESC>:tabnew<CR>
 
 imap <D-]> <ESC>gt
 imap <D-[> <ESC>gT
@@ -532,17 +562,10 @@ iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 map 0 ^
 
 "Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if MySys() == "mac"
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
-endif
+nmap <D-j> mz:m+<cr>`z
+nmap <D-k> mz:m-2<cr>`z
+vmap <D-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <D-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 "Delete trailing white space, useful for Python ;)
 func! DeleteTrailingWS()
@@ -603,8 +626,8 @@ let g:bufExplorerSplitVertSize = 30
 let g:bufExplorerUseCurrentWindow=1
 
 let g:bufExplorerSortBy='mru'
-map <leader>o :BufExplorer<cr>
-map <F4> :BufExplorer<cr>
+"map <leader>o :BufExplorer<cr>
+"map <F4> :BufExplorer<cr>
 
 
 """"""""""""""""""""""""""""""
@@ -645,6 +668,13 @@ map <leader>s? z=
 
 
 """"""""""""""""""""""""""""""
+" => Ruby section
+""""""""""""""""""""""""""""""
+au FileType ruby imap <S-CR> <CR><CR>end<Esc>-cc
+au FileType ruby map <buffer> <leader><space> :w!<cr>:!ruby %<cr>
+
+
+""""""""""""""""""""""""""""""
 " => Python section
 """"""""""""""""""""""""""""""
 let python_highlight_all = 1
@@ -676,6 +706,9 @@ au FileType javascript inoremap <buffer> $r return
 au FileType javascript inoremap <buffer> $f //--- PH ----------------------------------------------<esc>FP2xi
 
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+au BufRead,BufNewFile *.json set ft=javascript
+
+map <Leader>jf <Esc>:%!python -m json.tool<CR>
 
 function! JavaScriptFold()
     setl foldmethod=syntax
@@ -710,11 +743,25 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 1
 let g:neocomplcache_disable_auto_complete = 0
 let g:neocomplcache_snippets_dir = "~/.vim/snippets"
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-"inoremap <expr><TAB>  pumvisible() ? neocomplcache#close_popup() : "\<TAB>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+inoremap <expr><TAB>  pumvisible() ? neocomplcache#close_popup() : "\<TAB>"
 imap <expr><CR> neocomplcache#sources#snippets_complete#expandable() == 1 ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? neocomplcache#close_popup() : "\<TAB>"
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+"inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+"" <TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y>  neocomplcache#close_popup()
+"inoremap <expr><C-e>  neocomplcache#cancel_popup()
+"inoremap <silent><CR>  <C-R>=neocomplcache#smart_close_popup()<CR><CR>
+
 
 imap <expr><a-.>  pumvisible() ? "\<C-n>" : "\<c-x><c-u>"
 
@@ -762,8 +809,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 " => MRU plugin
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
-map <leader>f :MRU<CR>
-map <a-f> :Mru<cr>
+"map <leader>f :MRU<CR>
+map <M-r> :Mru<cr>
 
 """"""""""""""""""""""""""""""
 " => snipMate plugin
@@ -819,9 +866,15 @@ map <leader>pp :setlocal paste!<cr>
 
 map <leader>bb :cd ..<cr>
 
-" commenting
-vmap <m-/> ,c<space>gv
-map <a-/> ,c<space>
+" TComment
+map <c-/> <ESC>:TComment<CR>
+map <a-/> <ESC>:TComment<CR>
+map <m-/> <ESC>:TComment<CR>
+
+vmap <c-/> :TComment<CR>
+vmap <a-/> :TComment<CR>
+vmap <m-/> :TComment<CR>
+
 imap <a-h> <Left>
 imap <a-j> <Down>
 imap <a-k> <Up>
@@ -854,14 +907,14 @@ imap <C-a> <esc><s-i>
 imap <C-e> <End>
 imap <C-q> <Esc>
 imap <C-d> <Delete>
+imap <a-f> <esc>ea
 
 
 nnoremap <leader>r :call rainbow_parentheses#Toggle()<CR>
 nnoremap <c-u> :GundoToggle<CR>
-nnoremap <a-b> :ToggleBG<CR>
-noremap <a-p> :call Pep8()<CR>
-noremap <leader>p :call Pep8()<CR>
-noremap! <a-p> <Esc>:call Pep8()<CR>
+"noremap <a-p> :call Flake8()<CR>
+noremap <leader>p :call Flake8()<CR>
+"noremap! <a-p> <Esc>:call Flake8()<CR>
 
 "let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
@@ -880,13 +933,89 @@ if exists(":Tabularize")
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
-nnoremap <leader>a :Ack<space>
+nnoremap <leader>ak :Ack<space>
 nnoremap <leader>ap :Ack --python<space>
 nnoremap <leader>aj :Ack --js<space>
 nnoremap <leader>ah :Ack --html<space>
 
-nmap <leader>l :TagbarToggle<CR>
+" Tagbar
+let g:tagbar_left = 1
+let g:tagbar_width = 30
+let g:tagbar_autofocus = 1
+let g:tagbar_compact = 1
+let g:tagbar_expand = 1
+nmap <leader>l :TagbarOpenAutoClose<CR>
 
 vmap s S
 
 nmap <tab> %
+
+let $PYTHONPATH .= ":/Library/Python/2.7/site-packages"
+"autocmd FileType python setlocal omnifunc=RopeCompleteFunc
+
+nnoremap <leader>v V`]
+
+nmap <silent> to :call append('.', '')<CR>j
+nmap <silent> tO :call append(line('.')-1, '')<CR>k
+nmap tp "+P
+
+" EasyMotion
+let g:EasyMotion_mapping_f = 'tf'
+let g:EasyMotion_mapping_F = 'tF'
+let g:EasyMotion_mapping_t = 'tt'
+let g:EasyMotion_mapping_T = 'tT'
+let g:EasyMotion_mapping_w = 'tw'
+let g:EasyMotion_mapping_W = 'tW'
+let g:EasyMotion_mapping_b = 'tb'
+let g:EasyMotion_mapping_B = 'tB'
+let g:EasyMotion_mapping_e = 'te'
+let g:EasyMotion_mapping_E = 'tE'
+let g:EasyMotion_mapping_ge = 'tge'
+let g:EasyMotion_mapping_gE = 'tgE'
+let g:EasyMotion_mapping_j = 'tj'
+let g:EasyMotion_mapping_k = 'tk'
+
+" LustyExplorer
+nnoremap <M-b> :LustyBufferExplorer<CR>
+nnoremap <M-g> :LustyBufferGrep<CR>
+nnoremap <M-f> :LustyFilesystemExplorer<CR>
+nnoremap <M-f> :LustyFilesystemExplorer<CR>
+nnoremap <M-l> :LustyFilesystemExplorerFromHere<CR>
+nnoremap <M-j> :LustyJuggler<CR>
+
+"map <C-c> <Esc>:CtrlPCurFile<CR>
+map <C-c> <Esc>:CtrlP<CR>
+
+command! XMLlint exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+function! YRRunAfterMaps()
+    nnoremap <silent> Y :<C-U>YRYankCount 'y$'<CR>
+endfunction
+
+let g:ctrlp_map = '<c-t>'
+let g:ctrlp_by_filename = 1
+let g:ctrlp_max_depth = 3
+let g:ctrlp_match_window_reversed = 0
+
+nnoremap <leader>f :CtrlPMRU<CR>
+
+nnoremap <F2> <ESC>:call Youdao()<cr>
+
+let g:html_number_lines = 0
+
+function! ToHtml(line1, line2)
+  " generate and delete unneeded lines
+  colo EspressoTutti
+  exec a:line1.','.a:line2.'TOhtml'
+  exec 'w! ~/Ramdisk/Caches/tohtml.html'
+  exec '!open ~/Ramdisk/Caches/tohtml.html'
+  exec 'bd!'
+endfunction
+command! -range=% ToHtml :call ToHtml(<line1>,<line2>)
+
+au FileType javascript nmap <silent> <F4> <ESC>:%!js-beautify -i<CR>
+au FileType javascript vmap <silent> <F4> <ESC>:'<,'>!js-beautify -i<CR>
+
+au FileType xml,html,xhtml nmap <silent> <F4> <ESC>:XMLlint<CR>
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
