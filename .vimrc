@@ -1,5 +1,7 @@
 let g:pathogen_disabled = []
 call add(g:pathogen_disabled, 'vim-endwise')
+call add(g:pathogen_disabled, 'yankring.vim')
+call add(g:pathogen_disabled, 'YouCompleteMe')
 
 call pathogen#infect()
 
@@ -107,9 +109,9 @@ imap <S-Insert>     <C-V>
 vmap <S-Insert>     <C-V>
 noremap <C-S>       :update<CR>
 vnoremap <C-S>      <C-C>:update<CR>
-noremap <C-Z> u
+"noremap <C-Z> u
 inoremap <C-S>      <C-O>:update<CR>
-inoremap <C-Z> <C-O>u
+"inoremap <C-Z> <C-O>u
 if has("gui")
   noremap <M-Space> :simalt ~<CR>
   inoremap <M-Space> <C-O>:simalt ~<CR>
@@ -514,6 +516,15 @@ set laststatus=2
 " Format the statusline
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ %{fugitive#statusline()}\ \ \ Line:\ %l/%L:%c
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=\ %{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+nnoremap <leader>n :lnext<cr>
+nnoremap <leader>p :lprev<cr>
+
 
 function! CurDir()
     let curdir = substitute(getcwd(), '/Users/amir/', "~/", "g")
@@ -596,8 +607,8 @@ set guitablabel=%t
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Do :help cope if you are unsure what cope is. It's super useful!
 "map <leader>cc :botright cope<cr>
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
+"map <leader>n :cn<cr>
+"map <leader>p :cp<cr>
 
 " toggle colored right border after 80 chars
 set colorcolumn=0
@@ -627,6 +638,7 @@ let g:bufExplorerUseCurrentWindow=1
 
 let g:bufExplorerSortBy='mru'
 "map <leader>o :BufExplorer<cr>
+"map <leader>b :BufExplorerVerticalSplit<cr>
 "map <F4> :BufExplorer<cr>
 
 
@@ -672,7 +684,7 @@ map <leader>s? z=
 """"""""""""""""""""""""""""""
 au FileType ruby imap <S-CR> <CR><CR>end<Esc>-cc
 au FileType ruby map <buffer> <leader><space> :w!<cr>:!ruby %<cr>
-
+au BufNewFile,BufRead Podfile,*.podspec set filetype=ruby
 
 """"""""""""""""""""""""""""""
 " => Python section
@@ -725,6 +737,15 @@ endfunction
 " => nerdtree plugin
 """"""""""""""""""""""""""""""
 map <F3> :NERDTreeToggle<cr>
+
+""""""""""""""""""""""""""""""
+" => YouCompleteMe
+""""""""""""""""""""""""""""""
+let g:ycm_complete_in_comments_and_strings = 1
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
+let g:ycm_key_invoke_completion = "<a-/>"
 
 """"""""""""""""""""""""""""""
 " => neocomplcache plugin
@@ -870,6 +891,7 @@ map <leader>bb :cd ..<cr>
 map <c-/> <ESC>:TComment<CR>
 map <a-/> <ESC>:TComment<CR>
 map <m-/> <ESC>:TComment<CR>
+map <leader>c <ESC>:TComment<CR>
 
 vmap <c-/> :TComment<CR>
 vmap <a-/> :TComment<CR>
@@ -912,9 +934,6 @@ imap <a-f> <esc>ea
 
 nnoremap <leader>r :call rainbow_parentheses#Toggle()<CR>
 nnoremap <c-u> :GundoToggle<CR>
-"noremap <a-p> :call Flake8()<CR>
-noremap <leader>p :call Flake8()<CR>
-"noremap! <a-p> <Esc>:call Flake8()<CR>
 
 "let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
@@ -935,6 +954,7 @@ endif
 
 nnoremap <leader>ak :Ack<space>
 nnoremap <leader>ap :Ack --python<space>
+nnoremap <leader>ar :Ack --ruby<space>
 nnoremap <leader>aj :Ack --js<space>
 nnoremap <leader>ah :Ack --html<space>
 
@@ -948,7 +968,7 @@ nmap <leader>l :TagbarOpenAutoClose<CR>
 
 vmap s S
 
-nmap <tab> %
+"nmap <tab> %
 
 let $PYTHONPATH .= ":/Library/Python/2.7/site-packages"
 "autocmd FileType python setlocal omnifunc=RopeCompleteFunc
@@ -998,6 +1018,7 @@ let g:ctrlp_max_depth = 3
 let g:ctrlp_match_window_reversed = 0
 
 nnoremap <leader>f :CtrlPMRU<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 
 nnoremap <F2> <ESC>:call Youdao()<cr>
 
@@ -1018,4 +1039,9 @@ au FileType javascript vmap <silent> <F4> <ESC>:'<,'>!js-beautify -i<CR>
 
 au FileType xml,html,xhtml nmap <silent> <F4> <ESC>:XMLlint<CR>
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
+"let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" seek.vim
+let g:SeekKey = 'e'
+let g:SeekBackKey = 'E' 
+let g:seek_enable_jumps = 1

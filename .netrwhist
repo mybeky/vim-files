@@ -1,11 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/mybeky/Projects/按需印刷/TemplateEditor/.git'
-let g:netrw_dirhist_2='/Users/mybeky/Projects/TowerWeb/app/controllers/api'
-let g:netrw_dirhist_3='/Users/mybeky/Resource'
-let g:netrw_dirhist_4='/usr/local/etc/squid'
-let g:netrw_dirhist_5='/Users/mybeky/.cocoapods'
-let g:netrw_dirhist_6='/Users/mybeky/.cocoapods/master'
-let g:netrw_dirhist_7='/Users/mybeky/.cocoapods/master/MKNetworkKit'
-let g:netrw_dirhist_8='/Users/mybeky/.cocoapods/master/MKNetworkKit/0.87'
-let g:netrw_dirhist_9='/Users/mybeky/.cocoapods'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/mybeky/.rvm/gems/ruby-1.9.3-p194@tower/gems/grocer-0.3.2/lib'
+let g:netrw_dirhist_2='/Users/mybeky/.rvm/gems/ruby-1.9.3-p194@tower/gems/grocer-0.3.2/lib/grocer'
+let g:netrw_dirhist_3='/Users/mybeky/.rvm/gems/ruby-1.9.3-p194@tower/gems/grocer-0.3.2/lib'
+let g:netrw_dirhist_4='/Users/mybeky/Projects/cl-viewer'

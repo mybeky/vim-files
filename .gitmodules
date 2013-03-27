@@ -130,9 +130,12 @@
 [submodule "bundle/yankring"]
 	path = bundle/yankring
 	url = git://github.com/vim-scripts/YankRing.vim.git
-[submodule "bundle/kolor"]
-	path = bundle/kolor
-	url = git://github.com/zeis/kolor.git
 [submodule "bundle/neosnippet"]
 	path = bundle/neosnippet
 	url = git://github.com/Shougo/neosnippet.git
+[submodule "bundle/vim-seek"]
+	path = bundle/vim-seek
+	url = git://github.com/goldfeld/vim-seek.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = git://github.com/Valloric/YouCompleteMe.git
