@@ -522,6 +522,7 @@ set statusline+=\ %{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
+let g:syntastic_ruby_checkers=['rubocop']
 nnoremap <leader>n :lnext<cr>
 nnoremap <leader>p :lprev<cr>
 
@@ -1003,8 +1004,6 @@ nnoremap <M-f> :LustyFilesystemExplorer<CR>
 nnoremap <M-l> :LustyFilesystemExplorerFromHere<CR>
 nnoremap <M-j> :LustyJuggler<CR>
 
-"map <C-c> <Esc>:CtrlPCurFile<CR>
-map <C-c> <Esc>:CtrlP<CR>
 
 command! XMLlint exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
@@ -1012,11 +1011,20 @@ function! YRRunAfterMaps()
     nnoremap <silent> Y :<C-U>YRYankCount 'y$'<CR>
 endfunction
 
+"map <C-c> <Esc>:CtrlPCurFile<CR>
 let g:ctrlp_map = '<c-t>'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_depth = 3
 let g:ctrlp_match_window_reversed = 0
 
+" let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+nnoremap <C-c> <Esc>:CtrlP<CR>
+nnoremap <c-m> :CtrlPMixed<CR>
 nnoremap <leader>f :CtrlPMRU<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 

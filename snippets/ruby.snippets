@@ -21,6 +21,15 @@ snippet rdb
     require 'debugger'; debugger
 	${1}
 
+snippet rlw
+    Rails.logger.warn ${1}
+
+snippet rlg
+    Rails.logger.log ${1}
+
+snippet rle
+    Rails.logger.error ${1}
+
 snippet :=
 	:${1:key} => ${2:"value"}${3}
 
